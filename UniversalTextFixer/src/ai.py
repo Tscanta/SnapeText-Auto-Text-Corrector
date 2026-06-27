@@ -1,14 +1,19 @@
 import os
+
 from dotenv import load_dotenv
 from google import genai
 
-# Load the API key from the .env file
+from src.config import MODEL_NAME
+from src.prompts import PROMPTS
+
+
+# Load the environment variables from the .env file
 load_dotenv()
 
 # Get the Gemini API key
 api_key = os.getenv("GEMINI_API_KEY")
 
-# Stop the program if no API key is found
+# Stop the program if the API key is missing
 if not api_key:
     raise ValueError("GEMINI_API_KEY not found!")
 
@@ -16,21 +21,46 @@ if not api_key:
 client = genai.Client(api_key=api_key)
 
 
-# Function to correct text using Gemini
-def correct_text(text):
-    """
-    Sends text to Gemini and returns the corrected version.
-    """
+# --------------------------------------------------
+# Sends text to Gemini and returns the AI response.
+#
+# Modes:
+# - grammar
+# - professional
+# - friendly
+# - academic
+# - simplify
+# - summarize
+# - translate
+# --------------------------------------------------
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=f"""
-Correct the spelling, grammar, and punctuation.
+def correct_text(text, mode="grammar"):
 
-Return ONLY the corrected text.
+    # Check whether the requested mode exists
+    if mode not in PROMPTS:
+        raise ValueError(f"Unknown mode: {mode}")
+
+    # Build the complete prompt for Gemini
+    prompt = f"""
+{PROMPTS[mode]}
 
 {text}
 """
-    )
 
-    return response.text.strip()
+    # Send the prompt to Gemini
+    try:
+
+        response = client.models.generate_content(
+            model=MODEL_NAME,
+            contents=prompt
+        )
+
+        # Return only the generated text
+        return response.text.strip()
+
+    except Exception as e:
+
+        print("\n❌ AI Error")
+        print(e)
+
+        return None
