@@ -30,6 +30,12 @@ def close_popup(window):
     
     window.destroy()
 
+BG = "#1E1E1E"
+CARD = "#252526"
+HOVER="#3E3E42"
+TEXT = "#FFFFFF"
+SUBTEXT = "#AAAAAA"
+ACCENT = "#4F8EF7"
 
 # Displaying the menu pop-up
 def show_popup(mouse_x,  mouse_y):
@@ -55,13 +61,17 @@ def show_popup(mouse_x,  mouse_y):
     window.attributes("-topmost", True) # Keep it above other windows
     window.update_idletasks() # Update the window so its size is calculated
 
+    window.configure(
+    bg=BG
+    )
+
     global popup_window
     popup_window = window
 
     # WINDOW SETTINGS
     window.title("SnapeText") # Window title
-    window.geometry("350x550") # Window size
-    window.resizable(True, True) # Prevent resizing
+    window.geometry("350x660") # Window size
+    window.resizable(True, True) # Resizing
 
     window.focus_force()
 
@@ -83,7 +93,7 @@ def show_popup(mouse_x,  mouse_y):
     #MOUSE STUFF
     # Get the current mouse position
     popup_width = 350
-    popup_height = 550
+    popup_height = 660
 
     screen_width = window.winfo_screenwidth()
     screen_height = window.winfo_screenheight()
@@ -104,14 +114,22 @@ def show_popup(mouse_x,  mouse_y):
 
 
     # HEADER FRAME
-    header = tk.Frame(window)
-    header.pack(pady=15)
+    header = tk.Frame(
+        window,
+        bg=BG
+    )
+    header.pack(
+        fill="x",
+        pady=(20,15)
+    )
 
     # TITLE
     title = tk.Label(
         header,
         text = "🖋 SnapeText",
-        font=("Segoe UI", 18, "bold")
+        bg=BG,
+        fg=TEXT,
+        font=("Segoe UI", 20, "bold")
     )
     title.pack(pady=15)
 
@@ -119,14 +137,33 @@ def show_popup(mouse_x,  mouse_y):
     subtitle = tk.Label(
         header,
         text="Choose a rewrite mode",
-        font=("Segoe UI", 10)
+        fg=SUBTEXT,
+        bg=BG,
+        font=("Segoe UI", 10),
+        
     )
     subtitle.pack(pady=(0, 20))
 
 
+    # SEPARATOR
+    separator = tk.Frame(
+    window,
+    bg="#3c3c3c",
+    height=1
+    )   
+    separator.pack(
+        fill="x",
+        padx=25,
+        pady=(0,15)
+    )
+
     # BUTTON FRAME
-    button_frame = tk.Frame(window)
+    button_frame = tk.Frame(
+        window,
+        bg=BG
+    )
     button_frame.pack()
+
 
     # ---------------------------------------
     # List of all buttons
@@ -156,9 +193,35 @@ def show_popup(mouse_x,  mouse_y):
         button = tk.Button(
             button_frame,
             text=text,
-            width=28,
-            font=("Segoe UI", 10),
-            command=lambda m=mode: on_button_click(window, selected_text, m) # Linking the buttons
+            bg=CARD,
+            fg=TEXT,
+            activebackground=HOVER,
+            activeforeground=TEXT,
+            relief="flat",
+            bd=0,
+            padx=20,
+            pady=12,
+            font=("Segoe UI", 11),
+            anchor="w",
+            cursor="hand2",
+            width=24,
+            command=lambda m=mode: 
+                on_button_click(window, selected_text, m) # Linking the buttons
         ) 
+        button.pack(
+            fill="x",
+            padx=25,
+            pady=6
+        )
 
-        button.pack(pady=4)
+        button.bind(
+            "<Enter>",
+            lambda e, b=button:
+                b.config(bg=HOVER)
+        )
+
+        button.bind(
+            "<Leave>",
+            lambda e, b=button:
+                b.config(bg=CARD)
+        )
