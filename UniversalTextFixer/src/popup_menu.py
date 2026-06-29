@@ -3,6 +3,7 @@ import tkinter as tk
 
 from src.corrector import run_correction
 from src.clipboard import get_selected_text
+from src.ai.providers import CURRENT_PROVIDER, set_provider
 from src.ui import root
 
 # True if the popup is already open
@@ -164,6 +165,16 @@ def show_popup(mouse_x,  mouse_y):
     )
     button_frame.pack()
 
+    # AI PROVIDER FRAME
+    provider_frame = tk.Frame(
+    window,
+    bg=BG
+    )
+
+    provider_frame.pack(
+        pady=(0, 15)
+    )
+
 
     # ---------------------------------------
     # List of all buttons
@@ -224,4 +235,25 @@ def show_popup(mouse_x,  mouse_y):
             "<Leave>",
             lambda e, b=button:
                 b.config(bg=CARD)
+        )
+
+        # Gemini Button
+        gemini_button = tk.Button(
+            provider_frame,
+            text="🟢 Gemini",
+        command=lambda: set_provider("gemini")
+        )
+        gemini_button.pack(
+            side="left",
+            padx=5
+        )
+        # OLLAMA BUTTON
+        ollama_button = tk.Button(
+            provider_frame,
+            text="🔵 Ollama",
+            command=lambda: set_provider("ollama")
+        )
+        ollama_button.pack(
+            side="left",
+                padx=5
         )

@@ -1,7 +1,7 @@
 import time
 import pyautogui
 import pyperclip
-from src.config import CLIPBOARD_DELAY
+from src.ai.config import CLIPBOARD_DELAY
 
 #Copies the user's selected text and returns it.
 def get_selected_text():

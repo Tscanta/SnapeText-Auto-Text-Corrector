@@ -1,6 +1,6 @@
 import time
 
-from src.ai import correct_text
+from src.ai.gemini import correct_text
 
 original_text = "helo hwo are yuo"
 mode = "grammar"

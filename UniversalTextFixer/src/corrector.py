@@ -1,7 +1,7 @@
 import time
 import threading
 
-from src.ai import correct_text
+from src.ai.manager import correct_text
 from src.clipboard import get_selected_text, replace_selected_text
 from src.loading_popup import show_loading, hide_loading
 from src.ui import root

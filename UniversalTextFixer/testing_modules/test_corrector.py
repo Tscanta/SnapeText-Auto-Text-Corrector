@@ -1,6 +1,6 @@
 import time
 from src.corrector import run_correction
-from src.config import COUNTDOWN
+from src.ai.config import COUNTDOWN
 
 print("Highlight some text...")
 print("You have 5 seconds.")

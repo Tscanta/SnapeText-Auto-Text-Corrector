@@ -3,8 +3,8 @@ import os
 from dotenv import load_dotenv
 from google import genai
 
-from src.config import MODEL_NAME
-from src.prompts import PROMPTS
+from src.ai.config import GEMINI_MODEL
+from src.ai.prompts import PROMPTS
 
 
 # Load the environment variables from the .env file
@@ -51,7 +51,7 @@ def correct_text(text, mode="grammar"):
     try:
 
         response = client.models.generate_content(
-            model=MODEL_NAME,
+            model=GEMINI_MODEL,
             contents=prompt
         )
 

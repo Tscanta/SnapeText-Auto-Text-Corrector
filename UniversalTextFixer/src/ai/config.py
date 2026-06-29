@@ -7,7 +7,8 @@ APP_NAME = "SnapeText"
 VERSION = "0.1.0"
 
 # AI Settings
-MODEL_NAME = "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-2.5-flash"
+OLLAMA_MODEL = "gemma3:4b"
 
 # Keyboard Shortcut
 HOTKEY = "ctrl+shift+f"

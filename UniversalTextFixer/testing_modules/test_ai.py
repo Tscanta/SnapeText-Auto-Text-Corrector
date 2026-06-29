@@ -1,4 +1,4 @@
-from src.ai import correct_text
+from src.ai.gemini import correct_text
 
 text = "helo hwo am ou are yuo"
 

@@ -1,6 +1,6 @@
 import time
 from src.clipboard import get_selected_text
-from src.config import COUNTDOWN
+from src.ai.config import COUNTDOWN
 
 print("Highlight text. You have 5 seconds...")
 time.sleep(COUNTDOWN)
