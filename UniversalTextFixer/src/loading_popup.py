@@ -1,7 +1,11 @@
 import tkinter as tk
 from src.ui import root
-loading_window = None
 
+loading_window = None
+status_label = None # Points to the "correcting..." label
+animation_step = 0
+
+# SHOWING THE LOADING POPUP
 def show_loading(mode):
     global loading_window
 
@@ -57,14 +61,15 @@ def show_loading(mode):
         pady=(20,10)
     )
 
-    status = tk.Label(
+    global status_label
+    status_label = tk.Label(
         frame,
-        text = "🤖Correcting text...",
+        text = "🤖Correcting...",
         bg="#1e1e1e",
         fg = "white",
         font=("Segoe UI", 12)
     )
-    status.pack(
+    status_label.pack(
         pady = (0,5)
     )
 
@@ -81,13 +86,40 @@ def show_loading(mode):
 
     loading_window.update_idletasks() # tells tkinter, "Finish laying out all the widgets first."
     loading_window.update()
+    animate_loading()
 
+
+# ANIMATION FOR THE LOADING DOTS
+def animate_loading():
+    global animation_step
+
+    #If the popup has been closed then dont animate
+    if not loading_window:
+        return
+    
+    dots = "." * ((animation_step % 3) + 1)
+
+    status_label.config(
+        text=f"🤖 Correcting{dots}"
+    )
+    animation_step += 1
+
+    loading_window.after(
+        350,
+        animate_loading
+    )
+
+# HIDING THE LOADING LABEL
 def hide_loading():
     global loading_window
+    global animation_step
 
     if loading_window:
         loading_window.destroy()
         loading_window = None
+        animation_step = 0
+
+
 
         
     
