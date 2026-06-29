@@ -1,110 +1,178 @@
-# 📝 Auto Grammar Corrector
+# 📝 SnapeText
 
-> A universal AI-powered writing assistant that works across Windows applications.
+> A universal AI-powered writing assistant for Windows.
 
-Auto Grammar Corrector is a desktop application designed to automatically detect and correct spelling mistakes, grammar, punctuation, and writing style in **any text field**, whether you're typing in a browser, Microsoft Word, Notepad, Discord, Slack, or other desktop applications.
+Snape is a desktop application that brings AI-powered writing assistance to **any Windows application**. Highlight text anywhere, invoke Snape with a global shortcut, choose a rewrite mode, and let AI instantly improve your writing without interrupting your workflow.
 
-The long-term goal is to provide a lightweight, fast, and privacy-conscious writing assistant that works everywhere instead of being limited to browser extensions.
-
----
-
-##  Planned Features
-
-*  Works in any desktop application
-*  Automatic spelling correction
-*  Grammar and punctuation correction
-*  AI-powered text rewriting
-*  Multi-language support
-*  Professional, casual, and academic writing modes
-*  Global keyboard shortcut
-*  Privacy-focused with optional local AI models
-*  Lightweight background application
-*  System tray integration
+Unlike browser extensions, Snape is designed to work system-wide, making it useful in browsers, Microsoft Word, Notepad, Discord, VS Code, Slack, email clients, and virtually any application that supports text selection.
 
 ---
 
-##  Current Progress
+#  Features
 
-###  Phase 1 – Desktop Automation Fundamentals
-
-Completed:
-
-* Clipboard read and write
-* Global hotkey detection
-* Automatic keyboard typing
-* Copying selected text from any application
-
-These experiments provide the foundation required for building a universal text correction tool.
-
----
-
-##  Tech Stack
-
-* Python
-* PyAutoGUI
-* Pyperclip
-* Keyboard
-* Git & GitHub
-
-### Planned
-
-* Tauri
-* Rust
-* SQLite
-* OpenAI API / Ollama
-* Windows API
+*  Works in almost any Windows application
+*  Powered by Google Gemini
+*  Grammar correction
+*  Professional rewriting
+*  Friendly rewriting
+*  Academic rewriting
+*  Simplify text
+*  Translation
+*  Summarization
+*  Ctrl + Middle Mouse popup menu
+*  Global keyboard shortcuts
+*  Automatic clipboard management
+*  Borderless popup positioned near the cursor
+*  Fast AI response (~1–2 seconds)
+*  API key stored securely using environment variables
 
 ---
 
-##  Project Structure
+#  How It Works
 
-```
-AutoGrammarCorrector/
+1. Highlight text in any application.
+2. Press **Ctrl + Middle Mouse**.
+3. Choose an AI mode.
+4. Snape copies the selected text.
+5. Gemini generates the improved version.
+6. Snape pastes the rewritten text back automatically.
+
+---
+
+# 📂 Project Structure
+
+```text
+UniversalTextFixer/
 │
+├── src/
+│   ├── ai.py
+│   ├── clipboard.py
+│   ├── config.py
+│   ├── corrector.py
+│   ├── hotkeys.py
+│   ├── main.py
+│   ├── mouse_listener.py
+│   ├── popup_menu.py
+│   ├── prompts.py
+│   ├── shutdown.py
+│   ├── tray.py
+│   ├── ui.py
+│   └── window_manager.py
+│
+├── testing_modules/
 ├── tests/
-│   ├── clipboard_test.py
-│   ├── hotkey_test.py
-│   ├── auto_type_test.py
-│   └── copy_selected_text.py
-│
-├── main.py
 ├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## 🎯 Roadmap
+# 🛠️ Tech Stack
 
-* [x] Clipboard interaction
+## Languages
+
+* Python
+
+## Libraries
+
+* Tkinter
+* Google Gemini API
+* PyAutoGUI
+* Pyperclip
+* Keyboard
+* Pynput
+* Python-dotenv
+* PyWin32
+
+## Tools
+
+* Git
+* GitHub
+* VS Code
+
+---
+
+# 🎯 Current Progress
+
+## ✅ Completed
+
+* Global keyboard shortcuts
+* Global mouse shortcut
+* Clipboard automation
+* Automatic copy & paste
+* AI integration with Gemini
+* Seven AI rewrite modes
+* Popup menu UI
+* Popup positioning near cursor
+* Popup closes automatically
+* Modular project architecture
+* Configuration system
+* Prompt management
+* Testing modules
+* Secure API key loading
+
+---
+
+# 🗺️ Roadmap
+
+## Phase 1 — Core Application ✅
+
+* [x] Clipboard automation
 * [x] Global hotkeys
-* [x] Keyboard automation
-* [x] Copy selected text
-* [ ] Replace selected text
-* [ ] Basic grammar correction engine
-* [ ] AI integration
-* [ ] Background system tray application
+* [x] Global mouse listener
+* [x] Replace selected text
+* [x] AI correction pipeline
+* [x] Popup menu
+* [x] Multiple AI modes
+
+## Phase 2 — Desktop Polish 🚧
+
+* [ ] Loading animation
+* [ ] Windows notifications
+* [ ] System tray controls
+* [ ] Settings window
+* [ ] Custom hotkeys
+* [ ] Theme support
+* [ ] Startup with Windows
+
+## Phase 3 — Advanced Features
+
+* [ ] Local AI (Ollama)
+* [ ] Multiple AI providers
+* [ ] Plugin system
+* [ ] OCR support
+* [ ] Voice input
+* [ ] Custom prompts
+* [ ] Rewrite history
+
+## Phase 4 — Release
+
 * [ ] Windows installer
-* [ ] Multi-language support
-* [ ] Local AI support
-* [ ] Public beta release
+* [ ] Auto updater
+* [ ] Executable (.exe)
+* [ ] Documentation
+* [ ] Public beta
 
 ---
 
-## 💡 Vision
+# 💡 Vision
 
-Instead of opening a website or browser extension to fix text, Auto Grammar Corrector aims to become a universal writing layer for Windows.
+Snape aims to become the AI writing layer for Windows.
 
-Highlight text anywhere, press a shortcut, and instantly receive corrected, polished writing without interrupting your workflow.
+Instead of opening websites or relying on browser extensions, users should be able to improve writing anywhere with a single shortcut.
 
----
-
-## 🤝 Contributing
-
-Contributions, ideas, and feedback are always welcome.
+The long-term goal is to build a lightweight, fast, privacy-conscious assistant that feels like a native part of the operating system.
 
 ---
 
-## 📄 License
+# 🤝 Contributing
+
+Contributions, ideas, feature requests, and bug reports are welcome.
+
+If you'd like to improve Snape, feel free to open an issue or submit a pull request.
+
+---
+
+# 📄 License
 
 This project is licensed under the MIT License.
