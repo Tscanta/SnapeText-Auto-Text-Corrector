@@ -1,4 +1,4 @@
-from ollama import chat
+import ollama
 from src.ai.prompts import PROMPTS
 from src.ai.config import OLLAMA_MODEL
 
@@ -29,12 +29,13 @@ def correct_text(text, mode="grammar"):
 {text}
 """
     print("Connecting to Ollama...")
+    print()
     print(f"Model: {OLLAMA_MODEL}")
     print(f"Prompt length: {len(prompt)}")
 
     try:
 
-        response = chat(
+        response = ollama.chat(
             model=OLLAMA_MODEL,
             messages=[
                 {

@@ -3,12 +3,49 @@ import tkinter as tk
 
 from src.corrector import run_correction
 from src.clipboard import get_selected_text
-from src.ai.providers import CURRENT_PROVIDER, set_provider
+from src.settings.settings_manager import (
+    get_provider,
+    set_provider
+)
 from src.ui import root
+from src.settings.settings_window import open_settings
 
 # True if the popup is already open
 popup_open = False
 popup_window = None
+gemini_button = None
+ollama_button = None
+
+
+# Highlighting the selected AI provider
+def refresh_provider_buttons():
+
+    global gemini_button
+    global ollama_button
+
+    if not gemini_button or not ollama_button:
+        return
+    
+    if get_provider() == "gemini":
+        gemini_button.config(
+            bg=ACCENT,
+            fg="white"
+        )
+        ollama_button.config(
+            bg=CARD,
+            fg=TEXT
+        )
+    else:
+        ollama_button.config(
+            bg=ACCENT,
+            fg="white"
+        )
+
+        gemini_button.config(
+            bg=CARD,
+            fg=TEXT
+        )
+    
 
 # Runs the selected AI mode and closes the popup.
 def on_button_click(window, text, mode):
@@ -71,7 +108,7 @@ def show_popup(mouse_x,  mouse_y):
 
     # WINDOW SETTINGS
     window.title("SnapeText") # Window title
-    window.geometry("350x660") # Window size
+    window.geometry("350x750") # Window size
     window.resizable(True, True) # Resizing
 
     window.focus_force()
@@ -94,7 +131,7 @@ def show_popup(mouse_x,  mouse_y):
     #MOUSE STUFF
     # Get the current mouse position
     popup_width = 350
-    popup_height = 660
+    popup_height = 750
 
     screen_width = window.winfo_screenwidth()
     screen_height = window.winfo_screenheight()
@@ -226,6 +263,29 @@ def show_popup(mouse_x,  mouse_y):
                 b.config(bg=CARD)
         )
 
+    # SETTINGS BUTTON
+    settings_button = tk.Button(
+        window,
+        text="⚙ Settings",
+        bg=CARD,
+        fg=TEXT,
+        activebackground=HOVER,
+        activeforeground=TEXT,
+        relief="flat",
+        bd=0,
+        padx=20,
+        pady=12,
+        font=("Segoe UI", 11),
+        cursor="hand2",
+        command=lambda: open_settings(window)
+    )
+    settings_button.pack(
+        fill="x",
+        padx=25,
+        pady=(15, 20)
+    )
+
+
     # AI PROVIDER FRAME
     provider_frame = tk.Frame(
         window,
@@ -237,28 +297,38 @@ def show_popup(mouse_x,  mouse_y):
     )
 
     # Gemini Button
+    global gemini_button 
+
     gemini_button = tk.Button(
         provider_frame,
         text="🟣 Gemini",
         command=lambda: (
             print("Using Gemini"),
-            set_provider("gemini")
+            set_provider("gemini"),
+            refresh_provider_buttons()
         )
     )
     gemini_button.pack(
         side="left",
         padx=5
     )
+
     # OLLAMA BUTTON
+    global ollama_button
+
     ollama_button = tk.Button(
         provider_frame,
         text="⚫ Ollama",
         command=lambda: (
             print("Using Ollama"),
-            set_provider("ollama")
+            set_provider("ollama"),
+            refresh_provider_buttons()
         )
     )
     ollama_button.pack(
         side="left",
             padx=5
     )
+
+    # Refresh once after both buttons exist
+    refresh_provider_buttons()

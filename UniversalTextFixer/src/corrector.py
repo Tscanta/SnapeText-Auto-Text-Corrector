@@ -6,6 +6,8 @@ from src.clipboard import get_selected_text, replace_selected_text
 from src.loading_popup import show_loading, hide_loading
 from src.ui import root
 
+import src.ai.providers as providers
+from src.ai.providers import set_provider
 
 # COMPLETE AI CORRECTION PIPELINE
 def run_correction(mode="grammar", original_text=None):
@@ -18,6 +20,8 @@ def run_correction(mode="grammar", original_text=None):
 
 
 def run_correction_worker(mode="grammar", original_text=None):
+
+    provider_name = get_provider().capitalize()
 
     total_start = time.perf_counter()
 
@@ -43,7 +47,8 @@ def run_correction_worker(mode="grammar", original_text=None):
     print("Original:", original_text)
 
     print()
-    print("🤖 Sending text to Gemini...")
+    print(f"🤖 Sending text to {provider_name}...")
+    print()
 
     # Show the loading popup
     root.after(
@@ -58,7 +63,7 @@ def run_correction_worker(mode="grammar", original_text=None):
         mode
     )
 
-    gemini_time = time.perf_counter() - start
+    ai_time = time.perf_counter() - start
 
     if corrected_text is None:
 
@@ -90,7 +95,7 @@ def run_correction_worker(mode="grammar", original_text=None):
 
     print()
 
-    print(f"Gemini Time : {gemini_time:.2f} s")
+    print(f"{provider_name} Time : {ai_time:.2f} s")
     print(f"Total Time  : {total_time:.2f} s")
 
     print("=========================================")

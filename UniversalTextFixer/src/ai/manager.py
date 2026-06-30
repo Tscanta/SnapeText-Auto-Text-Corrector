@@ -1,16 +1,16 @@
-import src.ai.providers as providers
+from src.settings.settings_manager import get_provider
 
 from src.ai.gemini import correct_text as gemini_correct
 from src.ai.ollama import correct_text as ollama_correct
 
 def correct_text(text, mode):
 
-    print(f"🤖 AI Provider: {providers.CURRENT_PROVIDER}")
+    print(f"🤖 AI Provider: {get_provider()}")
 
-    if providers.CURRENT_PROVIDER == "gemini":
+    if get_provider() == "gemini":
         return gemini_correct(text, mode)
     
-    if providers.CURRENT_PROVIDER == "ollama":
+    if get_provider() == "ollama":
         return ollama_correct(text, mode)
     
     raise ValueError("Unknown AI provider")

@@ -2,6 +2,7 @@ from pynput import mouse, keyboard
 from src.ui import root
 import src.popup_menu as popup_menu
 from src.popup_menu import show_popup
+import src.settings.settings_window as settings_window
 
 # Keep track of whether Ctrl is being held
 ctrl_pressed = False
@@ -31,6 +32,7 @@ def on_click(x, y, button, pressed):
         pressed
         and button == mouse.Button.left
         and popup_menu.popup_window
+        and not settings_window.is_settings_open()
     ):
 
         x1 = popup_menu.popup_window.winfo_rootx()
@@ -78,3 +80,4 @@ def start_mouse_listener():
 
     keyboard_listener.start()
     mouse_listener.start()
+

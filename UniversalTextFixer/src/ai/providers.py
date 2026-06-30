@@ -1,3 +1,8 @@
+from src.settings.settings_manager import (
+    get_provider,
+    set_provider
+)
+
 # Current AI provider
 CURRENT_PROVIDER = "gemini"
 

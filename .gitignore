@@ -1,20 +1,73 @@
-# Environment variables
-.env
+# -------------------------
+# Python
+# -------------------------
 
-# Virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
 .venv/
 venv/
-UniversalTextFixer/.venv/
-UniversalTextFixer/venv/
+env/
 
-# VS Code
+# -------------------------
+# Environment Variables
+# -------------------------
+
+.env
+
+# -------------------------
+# IDE
+# -------------------------
+
 .vscode/
-UniversalTextFixer/.vscode/
+.idea/
 
-# Python cache
-__pycache__/
-**/__pycache__/
-*.py[cod]
+# -------------------------
+# OS Files
+# -------------------------
 
-# macOS
+Thumbs.db
 .DS_Store
+
+# -------------------------
+# Python Build
+# -------------------------
+
+build/
+dist/
+*.egg-info/
+
+# -------------------------
+# Testing
+# -------------------------
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+# -------------------------
+# Logs
+# -------------------------
+
+*.log
+
+# -------------------------
+# Local Settings
+# -------------------------
+
+settings.local.json
+
+# -------------------------
+# Temporary Files
+# -------------------------
+
+*.tmp
+*.bak
+
+# -------------------------
+# AI Context
+# -------------------------
+
+AI_CONTEXT*.md

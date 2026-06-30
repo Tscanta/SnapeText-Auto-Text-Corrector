@@ -1,0 +1,6 @@
+{
+    "provider": "ollama",
+    "theme": "dark",
+    "startup": false,
+    "default_mode": "academic"
+}
