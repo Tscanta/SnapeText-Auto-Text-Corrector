@@ -1,8 +1,14 @@
+![Version](https://img.shields.io/badge/version-v0.7.0-blue)
+![Python](https://img.shields.io/badge/python-3.11+-yellow)
+![Platform](https://img.shields.io/badge/platform-Windows-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+
 # 🖋 SnapeText
 
 > A universal AI-powered writing assistant for Windows.
 
-**Version:** v0.6.0
+**Version:** v0.7.0
 
 Snape is a desktop application that brings AI-powered writing assistance to **any Windows application**. Highlight text anywhere, invoke Snape with a global shortcut, choose a rewrite mode, and let AI instantly improve your writing without interrupting your workflow.
 
@@ -10,39 +16,38 @@ Unlike browser extensions, Snape is designed to work system-wide, making it usef
 
 ---
 
-# 🚀 What's New in v0.6.0
+# 🚀 What's New in v0.7.0
 
-## ✨ New Features
-
-- Introduced a modular AI provider architecture.
-- Added Google Gemini backend.
-- Added Ollama backend (integration in progress).
-- Added AI Manager for backend routing.
-- Added provider management system.
-- Added loading popup with animated status.
-- Added performance metrics for AI requests.
-- Redesigned popup menu with a modern dark interface.
+- Added a fully functional Settings window.
+- Added persistent user settings using `settings.json`.
+- Added AI provider selection (Gemini / Ollama).
+- Added Default Rewrite Mode selection.
+- Added Theme preference system.
+- Added About section displaying version, provider, model and developer.
+- Added startup preference backend.
+- Added reusable settings manager.
+- Added AI context documentation (`AI_CONTEXT.md`).
 
 ## 🔧 Improvements
 
-- Refactored the project into a cleaner modular architecture.
-- Improved threading for a smoother user experience.
-- Improved popup interactions and window handling.
-- Separated AI providers for easier future expansion.
+- Improved project organization with a dedicated Settings module.
+- Refactored popup interactions with the Settings window.
+- Improved provider persistence across sessions.
+- Improved overall UI consistency.
+- Cleaner modular architecture for future expansion.
 
 ## 🚧 Known Issues
 
-- Ollama integration is currently being finalized.
-- Provider selection UI is under development.
-- Settings window is planned for the next release.
-
+- Windows Startup integration is not implemented yet.
+- Theme engine is currently preference-only.
+- Tray integration with Settings is still in development.
+  
 ---
 
 # ✨ Features
 
-- Works in almost any Windows application
-- Google Gemini support
-- Ollama support *(work in progress)*
+## AI Writing
+
 - Grammar correction
 - Professional rewriting
 - Friendly rewriting
@@ -50,15 +55,40 @@ Unlike browser extensions, Snape is designed to work system-wide, making it usef
 - Simplify text
 - Translation
 - Summarization
+
+## AI Providers
+
+- Google Gemini
+- Ollama (Local AI)
+- Switch AI providers instantly
+- Persistent provider selection
+
+## Productivity
+
+- Works in almost any Windows application
 - Ctrl + Middle Mouse popup menu
 - Global keyboard shortcuts
 - Automatic clipboard management
+- Automatic text replacement
 - Borderless popup positioned near the cursor
 - Loading popup with animated feedback
 - Performance reporting
-- Modular AI backend
-- Secure API key storage using environment variables
 
+## Settings
+
+- AI provider selection
+- Default rewrite mode
+- Theme preference
+- Startup preference
+- About page
+- Persistent settings using JSON
+
+## Developer
+
+- Modular AI backend
+- Secure API key storage
+- Modular architecture
+  
 ---
 
 # ⚡ How It Works
@@ -72,36 +102,42 @@ Unlike browser extensions, Snape is designed to work system-wide, making it usef
 
 ---
 
-# 📂 Project Structure
-
 ```text
-UniversalTextFixer/
-│
+SnapeText/
+
 ├── src/
-│   ├── ai/
-│   │   ├── config.py
-│   │   ├── gemini.py
-│   │   ├── manager.py
-│   │   ├── ollama.py
-│   │   ├── prompts.py
-│   │   └── providers.py
-│   │
-│   ├── clipboard.py
-│   ├── corrector.py
-│   ├── hotkeys.py
-│   ├── loading_popup.py
-│   ├── main.py
-│   ├── mouse_listener.py
-│   ├── popup_menu.py
-│   ├── shutdown.py
-│   ├── tray.py
-│   ├── ui.py
-│   └── window_manager.py
 │
-├── testing_modules/
-├── tests/
-├── requirements.txt
-└── README.md
+├── ai/
+│   ├── config.py
+│   ├── gemini.py
+│   ├── manager.py
+│   ├── ollama.py
+│   ├── prompts.py
+│   └── providers.py
+│
+├── settings/
+│   ├── settings.json
+│   ├── settings.py
+│   ├── settings_manager.py
+│   └── settings_window.py
+│
+├── clipboard.py
+├── corrector.py
+├── hotkeys.py
+├── loading_popup.py
+├── main.py
+├── mouse_listener.py
+├── popup_menu.py
+├── shutdown.py
+├── tray.py
+└── ui.py
+
+tests/
+testing_modules/
+
+README.md
+AI_CONTEXT.md
+.gitignore
 ```
 
 ---
@@ -160,53 +196,43 @@ UniversalTextFixer/
 
 # 🗺 Roadmap
 
-## Phase 1 — Core Application ✅
+## v0.7.0 — Settings Update 🚧
 
-- [x] Clipboard automation
-- [x] Global hotkeys
-- [x] Global mouse listener
-- [x] Replace selected text
-- [x] AI correction pipeline
-- [x] Popup menu
-- [x] Multiple rewrite modes
+- [x] Settings Window
+- [x] Settings Manager
+- [x] Provider Selection
+- [x] Default Rewrite Mode
+- [x] Theme Preference
+- [x] Startup Preference Backend
+- [x] About Section
+- [ ] Tray Integration
+- [ ] UI Polish
 
-## Phase 2 — Multi AI 🚧
+## v0.8.0 — Desktop Experience
 
-- [x] Gemini backend
-- [x] AI Manager
-- [x] Provider architecture
-- [x] Ollama backend
-- [ ] Complete Ollama integration
-- [ ] Provider selection UI
-
-## Phase 3 — Desktop Polish
-
-- [ ] Settings window
-- [ ] Theme support
+- [ ] Theme engine
 - [ ] Startup with Windows
 - [ ] Custom hotkeys
+- [ ] Rewrite history
 - [ ] Windows notifications
-- [ ] System tray controls
-- [ ] Saved user preferences
+- [ ] Better tray menu
+- [ ] AI model selector
 
-## Phase 4 — Advanced Features
+## v0.9.0 — Smart Features
 
 - [ ] OCR support
 - [ ] Voice input
-- [ ] Rewrite history
-- [ ] Custom prompts
-- [ ] Plugin system
-- [ ] Multiple local models
+- [ ] Screenshot translation
+- [ ] Better local AI support
 
-## Phase 5 — Release
+## v1.0.0 — Public Release
 
 - [ ] Windows installer
 - [ ] Standalone executable (.exe)
 - [ ] Auto updater
 - [ ] Documentation
 - [ ] Public beta
-- [ ] Version 1.0 release
-
+      
 ---
 
 # 💡 Vision
