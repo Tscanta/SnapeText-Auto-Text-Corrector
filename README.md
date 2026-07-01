@@ -1,5 +1,5 @@
 
-![Version](https://img.shields.io/badge/version-v0.7.0-blue)
+![Version](https://img.shields.io/badge/version-v0.7.1-blue)
 ![Python](https://img.shields.io/badge/python-3.11+-yellow)
 ![Platform](https://img.shields.io/badge/platform-Windows-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
