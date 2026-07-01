@@ -120,6 +120,9 @@ def open_settings(parent_popup=None):
 
     # Prevent multiple settings windows
     if settings_window:
+        settings_window.deiconify() # Restore if minimized
+        settings_window.lift() # Bring to front
+        settings_window.focus_force() # Force focus
         return
     
     settings_window = tk.Toplevel(root)
