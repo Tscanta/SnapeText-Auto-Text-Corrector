@@ -6,8 +6,7 @@ from src.clipboard import get_selected_text, replace_selected_text
 from src.loading_popup import show_loading, hide_loading
 from src.ui import root
 
-import src.ai.providers as providers
-from src.ai.providers import set_provider
+from src.settings.settings_manager import get_provider
 
 # COMPLETE AI CORRECTION PIPELINE
 def run_correction(mode="grammar", original_text=None):

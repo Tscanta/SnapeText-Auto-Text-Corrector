@@ -2,20 +2,20 @@ import os
 import keyboard
 
 from src.ui import root
-from src import mouse_listener
 
-def shutdown():
+# Shut down SnapeText cleanly.
+def shutdown(icon=None):
 
     print("Shutting down...")
 
+    # Remove all keyboard hooks
     keyboard.unhook_all()
 
-    if mouse_listener.keyboard_listener:
-        mouse_listener.keyboard_listener.stop()
+    if icon is not None:
+        icon.stop()
 
-    if mouse_listener.mouse_listener:
-        mouse_listener.mouse_listener.stop()
-
+    # Stop the Tkinter event loop
     root.quit()
 
+    # Forcefully exit the process
     os._exit(0)

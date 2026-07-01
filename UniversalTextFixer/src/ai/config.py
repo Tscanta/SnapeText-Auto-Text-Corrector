@@ -10,11 +10,5 @@ VERSION = "v0.6.0"
 GEMINI_MODEL = "gemini-2.5-flash"
 OLLAMA_MODEL = "gemma3:4b"
 
-# Keyboard Shortcut
-HOTKEY = "ctrl+shift+f"
-
 # Timing
 CLIPBOARD_DELAY = 0.2
-
-# Countdown before copying highlighted text
-COUNTDOWN = 5

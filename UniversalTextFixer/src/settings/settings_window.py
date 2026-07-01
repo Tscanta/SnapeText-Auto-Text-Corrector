@@ -354,5 +354,3 @@ def close_settings():
         settings_window.destroy()
         settings_window = None
 
-def is_settings_open():
-    return settings_window is not None
