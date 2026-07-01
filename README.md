@@ -4,7 +4,7 @@
 ![Platform](https://img.shields.io/badge/platform-Windows-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-<img width="100" height="100" alt="tray_icon_v0 6" src="https://github.com/user-attachments/assets/4050780e-c491-443b-a7f9-8a4196b98457" />
+<img width="130" height="130" alt="tray_icon_v0 6" src="https://github.com/user-attachments/assets/4050780e-c491-443b-a7f9-8a4196b98457" />
 
 
 # 🖋 SnapeText
