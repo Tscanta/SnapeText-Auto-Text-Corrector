@@ -158,7 +158,7 @@ def show_popup(mouse_x,  mouse_y):
     )
     header.pack(
         fill="x",
-        pady=(20,15)
+        pady=(16,10)
     )
 
     # TITLE
@@ -167,20 +167,24 @@ def show_popup(mouse_x,  mouse_y):
         text = "🖋 SnapeText",
         bg=BG,
         fg=TEXT,
-        font=("Segoe UI", 20, "bold")
+        font=("Segoe UI", 18, "bold")
     )
-    title.pack(pady=15)
+    title.pack(
+        pady=(0, 4)
+    )
 
     # SUBTITLE
     subtitle = tk.Label(
         header,
-        text="Choose a rewrite mode",
+        text="AI Writing Assistant",
         fg=SUBTEXT,
         bg=BG,
         font=("Segoe UI", 10),
         
     )
-    subtitle.pack(pady=(0, 20))
+    subtitle.pack(
+        pady=(0, 12)
+        )
 
 
     # SEPARATOR
@@ -192,7 +196,7 @@ def show_popup(mouse_x,  mouse_y):
     separator.pack(
         fill="x",
         padx=25,
-        pady=(0,15)
+        pady=(0,18)
     )
 
     # BUTTON FRAME
