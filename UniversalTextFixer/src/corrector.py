@@ -7,6 +7,7 @@ from src.loading_popup import show_loading, hide_loading
 from src.ui import root
 
 from src.settings.settings_manager import get_provider
+from src.history.history_manager import add_history
 
 # COMPLETE AI CORRECTION PIPELINE
 def run_correction(mode="grammar", original_text=None):
@@ -79,6 +80,14 @@ def run_correction_worker(mode="grammar", original_text=None):
     )
 
     time.sleep(0.1) # Give Tkinter a tiny moment to destroy the popup
+
+    # Save the rewrite to history
+    add_history(
+        original=original_text,
+        rewritten=corrected_text,
+        mode=mode,
+        provider=get_provider()
+    )
 
     replace_selected_text(corrected_text) # Paste the corrected text
 

@@ -9,6 +9,7 @@ from src.settings.settings_manager import (
 )
 from src.ui import root
 from src.settings.settings_window import open_settings
+from src.history.history_window import open_history
 
 # True if the popup is already open
 popup_open = False
@@ -266,6 +267,28 @@ def show_popup(mouse_x,  mouse_y):
             lambda e, b=button:
                 b.config(bg=CARD)
         )
+
+    # HISTORY BUTTON
+    history_button = tk.Button(
+        window,
+        text="📜 History",
+        bg=CARD,
+        fg=TEXT,
+        activebackground=HOVER,
+        activeforeground=TEXT,
+        relief="flat",
+        bd=0,
+        padx=20,
+        pady=12,
+        font=("Segoe UI", 11),
+        cursor="hand2",
+        command=lambda: open_history(window)
+    )
+    history_button.pack(
+        fill="x",
+        padx=25,
+        pady=(15, 5)
+    )
 
     # SETTINGS BUTTON
     settings_button = tk.Button(

@@ -1,0 +1,30 @@
+[
+    {
+        "timestamp": "2026-07-08 21:18:45",
+        "mode": "simplify",
+        "provider": "gemini",
+        "original": "ada",
+        "rewritten": "ada"
+    },
+    {
+        "timestamp": "2026-07-08 21:14:25",
+        "mode": "friendly",
+        "provider": "gemini",
+        "original": "whats that",
+        "rewritten": "What's that?"
+    },
+    {
+        "timestamp": "2026-07-08 22:15:41",
+        "mode": "grammar",
+        "provider": "gemini",
+        "original": "i has a pen",
+        "rewritten": "I have a pen."
+    },
+    {
+        "timestamp": "2026-07-08 22:20:11",
+        "mode": "professional",
+        "provider": "gemini",
+        "original": "send me the file",
+        "rewritten": "Please send me the file."
+    }
+]
