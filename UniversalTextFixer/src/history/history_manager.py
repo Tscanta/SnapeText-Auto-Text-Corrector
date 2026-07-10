@@ -3,6 +3,7 @@
 # load_history(),
 # save_history(), 
 # add_history()
+# clear_history()
 
 import json
 from pathlib import Path
@@ -59,5 +60,7 @@ def add_history(original, rewritten, mode, provider):
             "rewritten": rewritten
         }
     )
-
     save_history(history)
+
+def clear_history():
+    save_history([])
