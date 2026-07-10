@@ -1,9 +1,16 @@
+# FUNCTIONS: 
+# open_history(),
+# close_history(), 
+# is_history_open()
+
+
 import tkinter as tk
 from src.ui import root
 from src.history.history_manager import load_history
 
 history_window = None
 popup_parent = None
+canvas = None
 
 BG = "#1E1E1E"
 CARD = "#252526"
@@ -54,7 +61,8 @@ def open_history(parent_popup=None):
         pady=(0, 20)
     )
 
-     # CANVAS
+    # CANVAS
+    global canvas
     canvas = tk.Canvas(
         container,
         bg=BG,
@@ -122,7 +130,7 @@ def open_history(parent_popup=None):
                 scrollable_frame,
                 bg=CARD,
                 padx=20,
-            pady=15
+                pady=15
             )
             card.pack(
                 fill="x",
@@ -144,7 +152,7 @@ def open_history(parent_popup=None):
             )
 
 
-             # BEFORE
+            # BEFORE
             before_title = tk.Label(
                 card,
                 text="Before",
@@ -169,7 +177,7 @@ def open_history(parent_popup=None):
                 anchor="w"
             )
 
-             # AFTER
+            # AFTER
             after_title = tk.Label(
                 card,
                 text="After",
@@ -194,10 +202,23 @@ def open_history(parent_popup=None):
                 anchor="w"
             )
 
+    # Bind mouse wheel for scrolling
+    canvas.bind_all(
+        "<MouseWheel>",
+        on_mouse_wheel
+    )
 
     history_window.protocol(
         "WM_DELETE_WINDOW",
         close_history
+    )
+
+
+# Scroll using the mouse wheel
+def on_mouse_wheel(event):
+    canvas.yview_scroll(
+        int(-1 * (event.delta / 120)),
+        "units"
     )
 
 # Closes the History window
@@ -205,6 +226,7 @@ def close_history():
     global history_window
 
     if history_window:
+        history_window.unbind_all("<MouseWheel>") # Unbinding the mouse wheel from the canvas
         history_window.destroy()
         history_window = None
 

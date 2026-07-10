@@ -115,3 +115,4 @@ def start_hotkey_listener():
     # Keep the listener alive forever
     keyboard.wait()
     print("Snape has died.")
+ 

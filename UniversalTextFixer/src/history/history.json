@@ -1,5 +1,12 @@
 [
     {
+        "timestamp": "2026-07-10 23:01:56",
+        "mode": "friendly",
+        "provider": "gemini",
+        "original": "ok lets do this one",
+        "rewritten": "Alright, let's do this one."
+    },
+    {
         "timestamp": "2026-07-08 21:18:45",
         "mode": "simplify",
         "provider": "gemini",
