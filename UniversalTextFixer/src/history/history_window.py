@@ -1,4 +1,6 @@
 # FUNCTIONS: 
+# on_canvas_configure(),
+# create_separator(),
 # open_history(),
 # close_history(), 
 # is_history_open()
@@ -6,11 +8,12 @@
 
 import tkinter as tk
 from src.ui import root
-from src.history.history_manager import load_history
+from src.history.history_manager import format_timestamp, load_history
 
 history_window = None
 popup_parent = None
 canvas = None
+canvas_window = None
 
 BG = "#1E1E1E"
 CARD = "#252526"
@@ -19,10 +22,31 @@ TEXT = "#FFFFFF"
 SUBTEXT = "#AAAAAA"
 ACCENT = "#4F8EF7"
 
+# Binds the canvas width to the scrollable frame width
+def on_canvas_configure(event):
+    canvas.itemconfig(
+        canvas_window,
+        width=event.width
+    )
+
+
+# Creates a separator line
+def create_separator(card):
+    separator = tk.Frame(
+        card, 
+        bg="#3A3A3C",
+        height=1
+    )
+    separator.pack(
+        fill="x",
+        pady=(0, 12)
+    )
+    return separator
+
 
 # Opens the History window
 def open_history(parent_popup=None):
-    global history_window, popup_parent
+    global history_window, popup_parent, canvas, canvas_window
 
     popup_parent = parent_popup
 
@@ -34,7 +58,7 @@ def open_history(parent_popup=None):
     history_window.title("Rewrite History") # Title of the window
     history = load_history() # Loading the rewrite history
     history_window.geometry("700x800") # Size of the window
-    history_window.resizable(False, False) 
+    history_window.resizable(True, True) 
     history_window.configure(bg=BG) # Background color of the window
 
     # TITLE
@@ -62,7 +86,6 @@ def open_history(parent_popup=None):
     )
 
     # CANVAS
-    global canvas
     canvas = tk.Canvas(
         container,
         bg=BG,
@@ -75,7 +98,7 @@ def open_history(parent_popup=None):
         expand=True
     )
 
-     # SCROLLBAR
+    # SCROLLBAR
     scrollbar = tk.Scrollbar(
         container,
         orient="vertical",
@@ -89,25 +112,30 @@ def open_history(parent_popup=None):
         yscrollcommand=scrollbar.set
     )
 
-     # SCROLLABLE FRAME
+    # SCROLLABLE FRAME
     scrollable_frame = tk.Frame(
         canvas,
         bg=BG
     )
-    canvas.create_window(
+    canvas_window = canvas.create_window(
         (0, 0),
         window=scrollable_frame,
         anchor="nw"
     )
 
-     # Updating the scroll region whenever the frame changes size
+    # Bind canvas resize to stretch the inner frame horizontally
+    canvas.bind(
+        "<Configure>",
+        on_canvas_configure
+    )
+
+    # Updating the scroll region whenever the frame changes size
     scrollable_frame.bind(
         "<Configure>",
         lambda e: canvas.configure(
             scrollregion=canvas.bbox("all")
         )
     )
-
 
     # Placeholder
     if not history:
@@ -138,19 +166,52 @@ def open_history(parent_popup=None):
                 pady=5
             )
 
-            # Timestamp + Mode + Provider
-            header = tk.Label(
+            # HEADER FRAME
+            header_frame = tk.Frame(
                 card,
-                text=f"{item['timestamp']} • {item['mode'].capitalize()} • {item['provider'].capitalize()}",
+                bg=CARD
+            )
+            header_frame.pack(
+                fill="x"
+            )
+
+            # Mode
+            mode_label = tk.Label(
+                header_frame,
+                text=f"📝 {item['mode'].capitalize()}",
+                bg=CARD,
+                fg=TEXT,
+                font=("Segoe UI", 12, "bold")
+            )
+            mode_label.pack(
+                side="left"
+            )
+            # Provider
+            provider_label = tk.Label(
+                header_frame,
+                text=item["provider"].capitalize(),
+                bg=ACCENT,
+                fg="white",
+                font=("Segoe UI", 9, "bold"),
+            )
+            provider_label.pack(
+                side="left",
+                padx=(8, 0)
+            )
+            # Time Stamp
+            timestamp = tk.Label(
+                card,
+                text=f"🕒 {format_timestamp(item['timestamp'])}",
                 bg=CARD,
                 fg=SUBTEXT,
                 font=("Segoe UI", 9)
             )
-
-            header.pack(
-                anchor="w"
+            timestamp.pack(
+                anchor="w",
+                pady=(6, 10)
             )
 
+            separator = create_separator(card)
 
             # BEFORE
             before_title = tk.Label(
