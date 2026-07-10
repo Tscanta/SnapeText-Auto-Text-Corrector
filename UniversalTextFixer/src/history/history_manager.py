@@ -45,7 +45,7 @@ def save_history(history):
             ensure_ascii=False
         )
 
-        # Adds a new rewrite to the history.
+# Adds a new rewrite to the history.
 def add_history(original, rewritten, mode, provider):
 
     history = load_history()
@@ -62,5 +62,6 @@ def add_history(original, rewritten, mode, provider):
     )
     save_history(history)
 
-def clear_history():
+# Clears the rewrite history.
+def clear_history(): 
     save_history([])

@@ -1,14 +1,16 @@
 # FUNCTIONS: 
 # on_canvas_configure(),
 # create_separator(),
+# on_clear_history(),
 # open_history(),
 # close_history(), 
 # is_history_open()
 
 
 import tkinter as tk
+from tkinter import messagebox
 from src.ui import root
-from src.history.history_manager import format_timestamp, load_history
+from src.history.history_manager import format_timestamp, load_history, clear_history
 
 history_window = None
 popup_parent = None
@@ -43,6 +45,16 @@ def create_separator(card):
     )
     return separator
 
+def on_clear_history():
+    if not messagebox.askyesno(
+        "Clear history",
+        "Are you sure you want to clear all rewrite history?"
+    ):
+        return
+    
+    clear_history()
+    close_history()
+    open_history()
 
 # Opens the History window
 def open_history(parent_popup=None):
@@ -83,6 +95,16 @@ def open_history(parent_popup=None):
         expand=True,
         padx=20,
         pady=(0, 20)
+    )
+
+    # BUTTON FRAME
+    button_frame = tk.Frame(
+        history_window,
+        bg=BG
+    )
+    button_frame.pack(
+        fill="x",
+        pady=(10, 20)
     )
 
     # CANVAS
@@ -140,7 +162,7 @@ def open_history(parent_popup=None):
     # Placeholder
     if not history:
         empty = tk.Label(
-            history_window,
+            scrollable_frame,
             text="No history available.",
             bg=BG,
             fg=SUBTEXT,
@@ -211,7 +233,7 @@ def open_history(parent_popup=None):
                 pady=(6, 10)
             )
 
-            separator = create_separator(card)
+            create_separator(card)
 
             # BEFORE
             before_title = tk.Label(
@@ -237,6 +259,8 @@ def open_history(parent_popup=None):
             before.pack(
                 anchor="w"
             )
+
+            create_separator(card)
 
             # AFTER
             after_title = tk.Label(
@@ -269,6 +293,28 @@ def open_history(parent_popup=None):
         on_mouse_wheel
     )
 
+    # Clear history button
+    clear_button = tk.Button(
+        button_frame,
+        text="🗑 Clear History",
+        bg=CARD,
+        fg=TEXT,
+        activebackground=HOVER,
+        activeforeground=TEXT,
+        relief="flat",
+        bd=0,
+        padx=20,
+        pady=12,
+        font=("Segoe UI", 11),
+        cursor="hand2",
+        command=on_clear_history
+    )
+
+    clear_button.pack(
+        padx=20
+    )
+
+    # Close button
     history_window.protocol(
         "WM_DELETE_WINDOW",
         close_history
