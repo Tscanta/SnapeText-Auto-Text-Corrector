@@ -65,4 +65,4 @@ def correct_text(text, mode="grammar"):
         print("\n❌ AI Error")
         print(e)
 
-        return None
+        raise e

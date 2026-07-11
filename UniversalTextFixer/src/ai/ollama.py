@@ -53,4 +53,4 @@ def correct_text(text, mode="grammar"):
         print(type(e).__name__)
         print(e)
 
-        return None
+        raise e

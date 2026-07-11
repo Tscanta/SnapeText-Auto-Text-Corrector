@@ -5,9 +5,10 @@ from src.ai.manager import correct_text
 from src.clipboard import get_selected_text, replace_selected_text
 from src.loading_popup import show_loading, hide_loading
 from src.ui import root
-
+from src.error_handler import show_error
 from src.settings.settings_manager import get_provider
 from src.history.history_manager import add_history
+
 
 # COMPLETE AI CORRECTION PIPELINE
 def run_correction(mode="grammar", original_text=None):
@@ -39,7 +40,7 @@ def run_correction_worker(mode="grammar", original_text=None):
     if not original_text.strip():
         print("No text selected.")
         return
-    
+
     character_count = len(original_text)
     word_count = len(original_text.split())
 
@@ -58,14 +59,14 @@ def run_correction_worker(mode="grammar", original_text=None):
 
     start = time.perf_counter()
 
-    corrected_text = correct_text(
-        original_text,
-        mode
-    )
+    try:
 
-    ai_time = time.perf_counter() - start
+        corrected_text = correct_text(
+            original_text,
+            mode
+        )
 
-    if corrected_text is None:
+    except Exception as e:
 
         # Hide the loading popup
         root.after(
@@ -74,8 +75,17 @@ def run_correction_worker(mode="grammar", original_text=None):
         )
 
         print()
-        print("❌ Correction failed.")
+        print("❌ AI Error")
+        print(e)
+
+        show_error(
+            "SnapeText Error",
+            "Unable to process your request.\n\nPlease check your AI provider and try again."
+        )
+
         return
+
+    ai_time = time.perf_counter() - start
 
     total_time = time.perf_counter() - total_start
 
@@ -85,7 +95,7 @@ def run_correction_worker(mode="grammar", original_text=None):
         hide_loading
     )
 
-    time.sleep(0.1) # Give Tkinter a tiny moment to destroy the popup
+    time.sleep(0.1)  # Give Tkinter a tiny moment to destroy the popup
 
     # Save the rewrite to history
     add_history(
@@ -95,8 +105,8 @@ def run_correction_worker(mode="grammar", original_text=None):
         provider=get_provider()
     )
 
-    replace_selected_text(corrected_text) # Paste the corrected text
-
+    # Paste the corrected text
+    replace_selected_text(corrected_text)
 
     print()
     print("=========================================")
