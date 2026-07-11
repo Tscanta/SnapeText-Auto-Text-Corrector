@@ -96,6 +96,7 @@ def show_popup(mouse_x,  mouse_y):
         return
 
     window = tk.Toplevel(root) # Create the window
+    window.withdraw() # Hide the window until it's fully configured
     window.overrideredirect(True) # Remove the normal title bar
     window.attributes("-topmost", True) # Keep it above other windows
     window.update_idletasks() # Update the window so its size is calculated
@@ -111,6 +112,8 @@ def show_popup(mouse_x,  mouse_y):
     window.title("SnapeText") # Window title
     window.geometry("350x750") # Window size
     window.resizable(True, True) # Resizing
+    window.deiconify() # Show the window after it's fully configured
+    window.lift() # Bring the window to the front
 
     window.focus_force()
 
