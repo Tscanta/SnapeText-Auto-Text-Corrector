@@ -107,9 +107,8 @@ def save_settings(provider_var, mode_var, theme_var, startup_var):
 
     close_settings()
 
-    if popup_parent:
+    if popup_parent and popup_parent.winfo_exists(): # Check if the parent popup exists
         popup_parent.lift()
-    
     
 # Opens the Settings window
 def open_settings(parent_popup=None):
