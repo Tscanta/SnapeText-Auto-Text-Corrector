@@ -117,6 +117,12 @@ def show_popup(mouse_x,  mouse_y):
 
     window.focus_force()
 
+    # Close the popup if the user clicks outside of it
+    window.bind(
+        "<FocusOut>",
+        lambda event: close_popup(window)
+    )
+
     window.update_idletasks()
 
     # If the user presses ESC, close the popup
