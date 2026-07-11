@@ -10,6 +10,7 @@ from src.settings.settings_manager import (
 from src.ui import root
 from src.settings.settings_window import open_settings
 from src.history.history_window import open_history
+from src.animations import fade_in
 
 # True if the popup is already open
 popup_open = False
@@ -97,6 +98,7 @@ def show_popup(mouse_x,  mouse_y):
 
     window = tk.Toplevel(root) # Create the window
     window.withdraw() # Hide the window until it's fully configured
+    window.attributes("-alpha", 0.0)
     window.overrideredirect(True) # Remove the normal title bar
     window.attributes("-topmost", True) # Keep it above other windows
     window.update_idletasks() # Update the window so its size is calculated
@@ -112,7 +114,6 @@ def show_popup(mouse_x,  mouse_y):
     window.title("SnapeText") # Window title
     window.geometry("350x750") # Window size
     window.resizable(True, True) # Resizing
-    window.deiconify() # Show the window after it's fully configured
     window.lift() # Bring the window to the front
 
     window.focus_force()
@@ -368,3 +369,9 @@ def show_popup(mouse_x,  mouse_y):
 
     # Refresh once after both buttons exist
     refresh_provider_buttons()
+
+    # Show the popup after it has been fully built
+    window.deiconify()
+    window.lift()
+    window.focus_force()
+    fade_in(window)

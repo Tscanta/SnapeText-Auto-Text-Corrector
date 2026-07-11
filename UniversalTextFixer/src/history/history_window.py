@@ -79,7 +79,7 @@ def open_history(parent_popup=None):
         text="📜 Rewrite History",
         bg=BG,
         fg=TEXT,
-        font=("Segoe UI", 20, "bold")
+        font=("Segoe UI", 22, "bold")
     )
     title.pack(
         pady=(20, 25)
@@ -166,7 +166,7 @@ def open_history(parent_popup=None):
             text="No history available.",
             bg=BG,
             fg=SUBTEXT,
-            font=("Segoe UI", 11)
+            font=("Segoe UI", 13)
         )
         empty.pack(
             pady=30
@@ -203,7 +203,7 @@ def open_history(parent_popup=None):
                 text=f"📝 {item['mode'].capitalize()}",
                 bg=CARD,
                 fg=TEXT,
-                font=("Segoe UI", 12, "bold")
+                font=("Segoe UI", 14, "bold")
             )
             mode_label.pack(
                 side="left"
@@ -214,7 +214,7 @@ def open_history(parent_popup=None):
                 text=item["provider"].capitalize(),
                 bg=ACCENT,
                 fg="white",
-                font=("Segoe UI", 9, "bold"),
+                font=("Segoe UI", 11, "bold"),
             )
             provider_label.pack(
                 side="left",
@@ -226,7 +226,7 @@ def open_history(parent_popup=None):
                 text=f"🕒 {format_timestamp(item['timestamp'])}",
                 bg=CARD,
                 fg=SUBTEXT,
-                font=("Segoe UI", 9)
+                font=("Segoe UI", 11)
             )
             timestamp.pack(
                 anchor="w",
@@ -241,7 +241,7 @@ def open_history(parent_popup=None):
                 text="Before",
                 bg=CARD,
                 fg=TEXT,
-                font=("Segoe UI", 10, "bold")
+                font=("Segoe UI", 12, "bold")
             )
             before_title.pack(
                 anchor="w",
@@ -254,7 +254,7 @@ def open_history(parent_popup=None):
                 fg=TEXT,
                 justify="left",
                 wraplength=600,
-                font=("Segoe UI", 10)
+                font=("Segoe UI", 12)
             )
             before.pack(
                 anchor="w"
@@ -268,7 +268,7 @@ def open_history(parent_popup=None):
                 text="After",
                 bg=CARD,
                 fg=TEXT,
-                font=("Segoe UI", 10, "bold")
+                font=("Segoe UI", 12, "bold")
             )
             after_title.pack(
                 anchor="w",
@@ -281,7 +281,7 @@ def open_history(parent_popup=None):
                 fg=TEXT,
                 justify="left",
                 wraplength=600,
-                font=("Segoe UI", 10)
+                font=("Segoe UI", 12)
             )
             after.pack(
                 anchor="w"
@@ -305,7 +305,7 @@ def open_history(parent_popup=None):
         bd=0,
         padx=20,
         pady=12,
-        font=("Segoe UI", 11),
+        font=("Segoe UI", 13),
         cursor="hand2",
         command=on_clear_history
     )
