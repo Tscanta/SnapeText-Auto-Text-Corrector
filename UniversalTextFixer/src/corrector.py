@@ -67,6 +67,12 @@ def run_correction_worker(mode="grammar", original_text=None):
 
     if corrected_text is None:
 
+        # Hide the loading popup
+        root.after(
+            0,
+            hide_loading
+        )
+
         print()
         print("❌ Correction failed.")
         return

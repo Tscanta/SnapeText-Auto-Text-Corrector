@@ -1,5 +1,5 @@
 {
-    "provider": "ollama",
+    "provider": "gemini",
     "theme": "dark",
     "startup": false,
     "default_mode": "professional"
