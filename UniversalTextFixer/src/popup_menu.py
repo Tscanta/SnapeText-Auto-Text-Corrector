@@ -1,3 +1,9 @@
+# FUNCTIONS:
+#  refresh_provider_buttons(),
+#  on_button_click(),
+#  close_popup(),
+#  show_popup()
+
 # A popup menu for the hotkeys menu using TKINTER a built-in python GUI creator
 import tkinter as tk
 
@@ -11,6 +17,7 @@ from src.ui import root
 from src.settings.settings_window import open_settings
 from src.history.history_window import open_history
 from src.animations import fade_in
+from src.theme import get_theme_colors
 
 # True if the popup is already open
 popup_open = False
@@ -20,7 +27,7 @@ ollama_button = None
 
 
 # Highlighting the selected AI provider
-def refresh_provider_buttons():
+def refresh_provider_buttons(ACCENT, CARD, TEXT):
 
     global gemini_button
     global ollama_button
@@ -70,16 +77,18 @@ def close_popup(window):
     
     window.destroy()
 
-BG = "#1E1E1E"
-CARD = "#252526"
-HOVER="#3E3E42"
-TEXT = "#FFFFFF"
-SUBTEXT = "#AAAAAA"
-ACCENT = "#4F8EF7"
 
 # Displaying the menu pop-up
 def show_popup(mouse_x,  mouse_y):
     global popup_open
+
+    THEME = get_theme_colors()
+    BG = THEME["BG"]
+    CARD = THEME["CARD"]
+    HOVER = THEME["HOVER"]
+    TEXT = THEME["TEXT"]
+    SUBTEXT = THEME["SUBTEXT"]
+    ACCENT = THEME["ACCENT"]
 
     # Don't create another popup if one already exists
     if popup_open:
@@ -201,7 +210,7 @@ def show_popup(mouse_x,  mouse_y):
     # SEPARATOR
     separator = tk.Frame(
     window,
-    bg="#3c3c3c",
+    bg=HOVER,
     height=1
     )   
     separator.pack(
@@ -342,7 +351,7 @@ def show_popup(mouse_x,  mouse_y):
         command=lambda: (
             print("Using Gemini"),
             set_provider("gemini"),
-            refresh_provider_buttons()
+            refresh_provider_buttons(ACCENT, CARD, TEXT)
         )
     )
     gemini_button.pack(
@@ -359,7 +368,7 @@ def show_popup(mouse_x,  mouse_y):
         command=lambda: (
             print("Using Ollama"),
             set_provider("ollama"),
-            refresh_provider_buttons()
+            refresh_provider_buttons(ACCENT, CARD, TEXT)
         )
     )
     ollama_button.pack(
@@ -368,7 +377,7 @@ def show_popup(mouse_x,  mouse_y):
     )
 
     # Refresh once after both buttons exist
-    refresh_provider_buttons()
+    refresh_provider_buttons(ACCENT, CARD, TEXT)
 
     # Show the popup after it has been fully built
     window.deiconify()

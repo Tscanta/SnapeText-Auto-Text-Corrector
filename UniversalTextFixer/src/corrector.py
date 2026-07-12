@@ -1,3 +1,7 @@
+# FUNCTIONS:
+#  run_correction(),
+#  run_correction_worker()
+
 import time
 import threading
 

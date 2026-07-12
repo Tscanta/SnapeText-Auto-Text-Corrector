@@ -1,3 +1,6 @@
+# FUNCTIONS:
+#  shutdown()
+
 import os
 import keyboard
 

@@ -1,3 +1,16 @@
+# FUNCTIONS:
+#  get_setting(),
+#  set_setting(),
+#  get_provider(),
+#  set_provider(),
+#  get_theme(),
+#  set_theme(),
+#  get_default_mode(),
+#  set_default_mode(),
+#  get_startup(),
+#  set_startup()
+
+
 from src.settings.settings import load_settings, save_settings
 
 # Returns the value of a setting.

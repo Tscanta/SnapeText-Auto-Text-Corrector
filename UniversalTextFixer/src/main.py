@@ -1,6 +1,5 @@
-# FUNCTIONS: main().
-
-
+# FUNCTIONS:
+#  main()
 
 #The main program where everything comes together
 import threading # Threading helps us run both the functions at the same time

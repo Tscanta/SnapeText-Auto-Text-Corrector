@@ -1,3 +1,7 @@
+# FUNCTIONS:
+#  load_settings(),
+#  save_settings()
+
 import json
 from pathlib import Path
 

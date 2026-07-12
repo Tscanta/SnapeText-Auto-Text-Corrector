@@ -1,6 +1,6 @@
 {
     "provider": "gemini",
-    "theme": "dark",
-    "startup": false,
+    "theme": "light",
+    "startup": true,
     "default_mode": "professional"
 }

@@ -1,3 +1,7 @@
+# FUNCTIONS:
+#  on_open_settings(),
+#  run_tray()
+
 from PIL import Image
 import pystray
 

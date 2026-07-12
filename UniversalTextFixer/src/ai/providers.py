@@ -1,3 +1,6 @@
+# FUNCTIONS:
+#  set_provider()
+
 from src.settings.settings_manager import (
     get_provider,
     set_provider

@@ -1,3 +1,6 @@
+# FUNCTIONS:
+#  correct_text()
+
 import os
 
 from dotenv import load_dotenv

@@ -3,6 +3,7 @@
 # create_separator(),
 # on_clear_history(),
 # open_history(),
+# on_mouse_wheel(),
 # close_history(), 
 # is_history_open()
 
@@ -11,18 +12,13 @@ import tkinter as tk
 from tkinter import messagebox
 from src.ui import root
 from src.history.history_manager import format_timestamp, load_history, clear_history
+from src.theme import get_theme_colors
 
 history_window = None
 popup_parent = None
 canvas = None
 canvas_window = None
 
-BG = "#1E1E1E"
-CARD = "#252526"
-HOVER = "#3E3E42"
-TEXT = "#FFFFFF"
-SUBTEXT = "#AAAAAA"
-ACCENT = "#4F8EF7"
 
 # Binds the canvas width to the scrollable frame width
 def on_canvas_configure(event):
@@ -31,12 +27,11 @@ def on_canvas_configure(event):
         width=event.width
     )
 
-
 # Creates a separator line
-def create_separator(card):
+def create_separator(parent, color):
     separator = tk.Frame(
-        card, 
-        bg="#3A3A3C",
+        parent, 
+        bg=color,
         height=1
     )
     separator.pack(
@@ -59,6 +54,15 @@ def on_clear_history():
 # Opens the History window
 def open_history(parent_popup=None):
     global history_window, popup_parent, canvas, canvas_window
+
+    THEME = get_theme_colors()
+    BG = THEME["BG"]
+    CARD = THEME["CARD"]
+    HOVER = THEME["HOVER"]
+    TEXT = THEME["TEXT"]
+    SUBTEXT = THEME["SUBTEXT"]
+    ACCENT = THEME["ACCENT"]
+
 
     popup_parent = parent_popup
 
@@ -233,7 +237,7 @@ def open_history(parent_popup=None):
                 pady=(6, 10)
             )
 
-            create_separator(card)
+            create_separator(card, HOVER)
 
             # BEFORE
             before_title = tk.Label(
@@ -260,7 +264,7 @@ def open_history(parent_popup=None):
                 anchor="w"
             )
 
-            create_separator(card)
+            create_separator(card, HOVER)
 
             # AFTER
             after_title = tk.Label(

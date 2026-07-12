@@ -1,6 +1,16 @@
+# FUNCTIONS:
+#  create_separator(),
+#  create_section_title(),
+#  create_section(),
+#  save_settings(),
+#  open_settings(),
+#  close_settings()
+
+
 import tkinter as tk
 from tkinter import ttk
 from src.ui import root
+from src.theme import get_theme_colors
 from src.settings.settings_manager import (
     get_provider,
     set_provider,
@@ -20,13 +30,6 @@ from src.ai.config import (
 settings_window = None
 popup_parent = None
 
-BG = "#1E1E1E"
-CARD = "#252526"
-HOVER="#3E3E42"
-TEXT = "#FFFFFF"
-SUBTEXT = "#AAAAAA"
-ACCENT = "#4F8EF7"
-
 MODES = [
     "grammar",
     "professional",
@@ -38,11 +41,11 @@ MODES = [
 ]
 
 # SEPERATOR HELPER
-def create_separator(parent):
+def create_separator(parent, color):
 
     separator = tk.Frame(
         parent,
-        bg="#3C3C3C",
+        bg=color,
         height=1
     )
     separator.pack(
@@ -52,12 +55,12 @@ def create_separator(parent):
     )
 
 # TITLE HELPER
-def create_section_title(parent, text):
+def create_section_title(parent, text, bg, fg):
     label = tk.Label(
         parent,
         text=text,
-        bg=BG,
-        fg=TEXT,
+        bg=bg,
+        fg=fg,
         font=("Segoe UI", 13, "bold")
     )
     label.pack(
@@ -68,12 +71,11 @@ def create_section_title(parent, text):
     return label
 
 # SECTION FRAME HELPER
-def create_section(parent):
+def create_section(parent, bg):
     frame = tk.Frame(
         parent,
-        bg=BG
+        bg=bg
     )
-
     frame.pack(
         fill="x",
         padx=30
@@ -115,6 +117,14 @@ def open_settings(parent_popup=None):
     global settings_window
     global popup_parent
 
+    THEME = get_theme_colors()
+    BG = THEME["BG"]
+    CARD = THEME["CARD"]
+    HOVER = THEME["HOVER"]
+    TEXT = THEME["TEXT"]
+    SUBTEXT = THEME["SUBTEXT"]
+    ACCENT = THEME["ACCENT"]
+
     popup_parent = parent_popup
 
     # Prevent multiple settings windows
@@ -129,16 +139,16 @@ def open_settings(parent_popup=None):
     settings_window.geometry("600x800")
     settings_window.resizable(False, False)
     settings_window.configure(
-        bg="#1E1E1E"
+        bg=BG
     )
 
-  
+   
     # TITLE
     title = tk.Label(
         settings_window,
         text="⚙ Snape Settings",
-        bg="#1E1E1E",
-        fg="white",
+        bg=BG,
+        fg=TEXT,
         font=("Segoe UI", 20, "bold")
     )
     title.pack(
@@ -146,7 +156,7 @@ def open_settings(parent_popup=None):
     )
     
     # PROVIDER SECTION
-    provider_frame = create_section(settings_window)
+    provider_frame = create_section(settings_window, BG)
     provider_frame.pack(
         fill="x",
         padx=30
@@ -154,8 +164,8 @@ def open_settings(parent_popup=None):
     provider_label = tk.Label( # LABELS
         provider_frame,
         text="AI Provider",
-        bg="#1E1E1E",
-        fg="white",
+        bg=BG,
+        fg=TEXT,
         font=("Segoe UI", 12, "bold")
     )
     provider_label.pack(
@@ -172,11 +182,11 @@ def open_settings(parent_popup=None):
         text="Gemini",
         value="gemini",
         variable=provider_var,
-        bg="#1E1E1E",
-        fg="white",
+        bg=BG,
+        fg=TEXT,
         selectcolor="#2B2B2B",
-        activebackground="#1E1E1E",
-        activeforeground="white",
+        activebackground=BG,
+        activeforeground=TEXT,
         font=("Segoe UI", 11)
     )
     gemini_radio.pack(
@@ -189,11 +199,11 @@ def open_settings(parent_popup=None):
         text="Ollama",
         value="ollama",
         variable=provider_var,
-        bg="#1E1E1E",
-        fg="white",
+        bg=BG,
+        fg=TEXT,
         selectcolor="#2B2B2B",
-        activebackground="#1E1E1E",
-        activeforeground="white",
+        activebackground=BG,
+        activeforeground=TEXT,
         font=("Segoe UI", 11)
     )
 
@@ -201,12 +211,14 @@ def open_settings(parent_popup=None):
         anchor="w"
     )
 
-    create_separator(settings_window)
+    create_separator(settings_window, HOVER)
 
     # DEFAULT MODE SELECTOR
     create_section_title(
         settings_window,
-        "Default Rewrite Mode"
+        "Default Rewrite Mode",
+        BG,
+        TEXT
     )
     mode_var = tk.StringVar(
         value=get_default_mode()
@@ -223,11 +235,13 @@ def open_settings(parent_popup=None):
         anchor="w"
     )
 
-    create_separator(settings_window)
+    create_separator(settings_window, HOVER)
 
     create_section_title(
         settings_window,
-        "🎨 Appearance"
+        "🎨 Appearance",
+        BG,
+        TEXT
     )
     theme_var = tk.StringVar( # Theme variable
         value=get_theme()
@@ -265,7 +279,7 @@ def open_settings(parent_popup=None):
         padx=30
     )
 
-    create_separator(settings_window)
+    create_separator(settings_window ,HOVER)
 
     # LAUNCH ON STARTUP?
     startup_var = tk.BooleanVar(
@@ -287,12 +301,14 @@ def open_settings(parent_popup=None):
         padx=30
     )
 
-    create_separator(settings_window)
+    create_separator(settings_window ,HOVER)
 
     #THE ABOUT SECTION
     create_section_title(
         settings_window,
-        "ℹ️ About"
+        "ℹ️ About",
+        BG,
+        TEXT
     )
     provider = get_provider()
 
@@ -323,8 +339,8 @@ def open_settings(parent_popup=None):
     save_button = tk.Button(
         settings_window,
         text="Save",
-        bg="#4F8EF7",
-        fg="white",
+        bg=ACCENT,
+        fg=TEXT,
         font=("Segoe UI", 11, "bold"),
         relief="flat",
         padx=25,
@@ -352,4 +368,3 @@ def close_settings():
     if settings_window:
         settings_window.destroy()
         settings_window = None
-

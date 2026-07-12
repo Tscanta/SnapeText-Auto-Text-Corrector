@@ -1,3 +1,6 @@
+# FUNCTIONS:
+#  correct_text()
+
 from src.settings.settings_manager import get_provider
 
 from src.ai.gemini import correct_text as gemini_correct

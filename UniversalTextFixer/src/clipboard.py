@@ -1,3 +1,7 @@
+# FUNCTIONS:
+#  get_selected_text(),
+#  replace_selected_text()
+
 import time
 import pyautogui
 import pyperclip

@@ -1,3 +1,8 @@
+# FUNCTIONS:
+#  show_loading(),
+#  animate_loading(),
+#  hide_loading()
+
 import tkinter as tk
 from src.ui import root
 
@@ -116,13 +121,3 @@ def hide_loading():
         loading_window.destroy()
         loading_window = None
         animation_step = 0
-
-
-
-        
-    
-
-
-
-
- 

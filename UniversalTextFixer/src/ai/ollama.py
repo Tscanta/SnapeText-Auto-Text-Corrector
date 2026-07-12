@@ -1,3 +1,6 @@
+# FUNCTIONS:
+#  correct_text()
+
 import ollama
 from src.ai.prompts import PROMPTS
 from src.ai.config import OLLAMA_MODEL
