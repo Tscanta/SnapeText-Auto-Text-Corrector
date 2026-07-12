@@ -13,6 +13,7 @@ from tkinter import messagebox
 from src.ui import root
 from src.history.history_manager import format_timestamp, load_history, clear_history
 from src.theme import get_theme_colors
+from src.theme_manager import register_window, unregister_window
 
 history_window = None
 popup_parent = None
@@ -51,6 +52,14 @@ def on_clear_history():
     close_history()
     open_history()
 
+def refresh_history_theme():
+    global popup_parent
+
+    if history_window:
+        parent = popup_parent
+        close_history()
+        open_history(parent)
+
 # Opens the History window
 def open_history(parent_popup=None):
     global history_window, popup_parent, canvas, canvas_window
@@ -71,6 +80,7 @@ def open_history(parent_popup=None):
         return
     
     history_window = tk.Toplevel(root) # Creating a new window
+    register_window(history_window, refresh_history_theme)
     history_window.title("Rewrite History") # Title of the window
     history = load_history() # Loading the rewrite history
     history_window.geometry("700x800") # Size of the window
@@ -337,6 +347,7 @@ def close_history():
     global history_window
 
     if history_window:
+        unregister_window(history_window) 
         history_window.unbind_all("<MouseWheel>") # Unbinding the mouse wheel from the canvas
         history_window.destroy()
         history_window = None

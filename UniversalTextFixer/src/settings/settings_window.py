@@ -2,6 +2,7 @@
 #  create_separator(),
 #  create_section_title(),
 #  create_section(),
+#  refresh_settings_theme(),
 #  save_settings(),
 #  open_settings(),
 #  close_settings()
@@ -11,6 +12,7 @@ import tkinter as tk
 from tkinter import ttk
 from src.ui import root
 from src.theme import get_theme_colors
+from src.theme_manager import register_window, unregister_window
 from src.settings.settings_manager import (
     get_provider,
     set_provider,
@@ -61,7 +63,7 @@ def create_section_title(parent, text, bg, fg):
         text=text,
         bg=bg,
         fg=fg,
-        font=("Segoe UI", 16, "bold")
+        font=("Segoe UI", 14, "bold")
     )
     label.pack(
         anchor="w",
@@ -81,6 +83,16 @@ def create_section(parent, bg):
         padx=30
     )
     return frame
+
+
+# Refreshes the settings window when the theme changes
+def refresh_settings_theme():
+    global popup_parent
+
+    if settings_window:
+        parent = popup_parent
+        close_settings()
+        open_settings(parent)
 
 
 # Save all the settings and close the window
@@ -135,8 +147,9 @@ def open_settings(parent_popup=None):
         return
     
     settings_window = tk.Toplevel(root)
+    register_window(settings_window, refresh_settings_theme)
     settings_window.title("Snape Settings")
-    settings_window.geometry("600x800")
+    settings_window.geometry("600x850")
     settings_window.resizable(False, False)
     settings_window.configure(
         bg=BG
@@ -149,7 +162,7 @@ def open_settings(parent_popup=None):
         text="⚙ Snape Settings",
         bg=BG,
         fg=TEXT,
-        font=("Segoe UI", 24, "bold")
+        font=("Segoe UI", 22, "bold")
     )
     title.pack(
         pady=(20, 25)
@@ -166,7 +179,7 @@ def open_settings(parent_popup=None):
         text="AI Provider",
         bg=BG,
         fg=TEXT,
-        font=("Segoe UI", 15, "bold")
+        font=("Segoe UI", 13, "bold")
     )
     provider_label.pack(
         anchor="w",
@@ -187,7 +200,7 @@ def open_settings(parent_popup=None):
         selectcolor=BG,
         activebackground=BG,
         activeforeground=TEXT,
-        font=("Segoe UI", 14)
+        font=("Segoe UI", 12)
     )
     gemini_radio.pack(
         anchor="w"
@@ -204,7 +217,7 @@ def open_settings(parent_popup=None):
         selectcolor=BG,
         activebackground=BG,
         activeforeground=TEXT,
-        font=("Segoe UI", 14)
+        font=("Segoe UI", 12)
     )
 
     ollama_radio.pack(
@@ -229,7 +242,7 @@ def open_settings(parent_popup=None):
         values=MODES,
         state="readonly",
         width=25,
-        font=("Segoe UI", 14)
+        font=("Segoe UI", 12)
     )
     mode_box.pack(
         padx=30,
@@ -257,7 +270,7 @@ def open_settings(parent_popup=None):
         selectcolor=BG,
         activebackground=BG,
         activeforeground=TEXT,
-        font=("Segoe UI", 14)
+        font=("Segoe UI", 12)
     )
     dark_radio.pack(
         anchor="w",
@@ -273,7 +286,7 @@ def open_settings(parent_popup=None):
         selectcolor=BG,
         activebackground=BG,
         activeforeground=TEXT,
-        font=("Segoe UI", 14)
+        font=("Segoe UI", 12)
     )
     light_radio.pack(
         anchor="w",
@@ -295,7 +308,7 @@ def open_settings(parent_popup=None):
         selectcolor=BG,
         activebackground=BG,
         activeforeground=TEXT,
-        font=("Segoe UI", 14)
+        font=("Segoe UI", 12)
     )
     startup_checkbox.pack(
         anchor="w",
@@ -329,7 +342,7 @@ def open_settings(parent_popup=None):
         justify="left",
         bg=BG,
         fg=TEXT,
-        font=("Segoe UI", 13)
+        font=("Segoe UI", 11)
     )
     about.pack(
         anchor="w",
@@ -342,7 +355,7 @@ def open_settings(parent_popup=None):
         text="Save",
         bg=ACCENT,
         fg=TEXT,
-        font=("Segoe UI", 14, "bold"),
+        font=("Segoe UI", 13, "bold"),
         relief="flat",
         padx=25,
         pady=8,
@@ -367,5 +380,6 @@ def close_settings():
     global settings_window
 
     if settings_window:
+        unregister_window(settings_window)
         settings_window.destroy()
         settings_window = None

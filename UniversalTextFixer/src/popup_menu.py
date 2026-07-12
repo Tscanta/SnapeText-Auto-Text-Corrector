@@ -2,6 +2,7 @@
 #  refresh_provider_buttons(),
 #  on_button_click(),
 #  close_popup(),
+#  refresh_popup_theme(),
 #  show_popup()
 
 # A popup menu for the hotkeys menu using TKINTER a built-in python GUI creator
@@ -18,6 +19,7 @@ from src.settings.settings_window import open_settings
 from src.history.history_window import open_history
 from src.animations import fade_in
 from src.theme import get_theme_colors
+from src.theme_manager import register_window, unregister_window
 
 # True if the popup is already open
 popup_open = False
@@ -75,7 +77,20 @@ def close_popup(window):
     popup_open = False
     popup_window = None
     
+    unregister_window(window)
     window.destroy()
+
+
+# Refreshes the popup when the theme changes
+def refresh_popup_theme():
+    global popup_open
+    global popup_window
+
+    if popup_window and popup_window.winfo_exists():
+        x = popup_window.winfo_x()
+        y = popup_window.winfo_y()
+        close_popup(popup_window)
+        show_popup(x, y)
 
 
 # Displaying the menu pop-up
@@ -118,6 +133,8 @@ def show_popup(mouse_x,  mouse_y):
 
     global popup_window
     popup_window = window
+
+    register_window(window, refresh_popup_theme)
 
     # WINDOW SETTINGS
     window.title("SnapeText") # Window title
