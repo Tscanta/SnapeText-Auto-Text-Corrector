@@ -309,6 +309,16 @@ def show_popup(mouse_x,  mouse_y):
         pady=(15, 5)
     )
 
+    history_button.bind(
+        "<Enter>",
+        lambda e: history_button.config(bg=HOVER)
+    )
+
+    history_button.bind(
+        "<Leave>",
+        lambda e: history_button.config(bg=CARD)
+    )
+
     # SETTINGS BUTTON
     settings_button = tk.Button(
         window,
@@ -331,6 +341,15 @@ def show_popup(mouse_x,  mouse_y):
         pady=(15, 20)
     )
 
+    settings_button.bind(
+        "<Enter>",
+        lambda e: settings_button.config(bg=HOVER)
+    )
+
+    settings_button.bind(
+        "<Leave>",
+        lambda e: settings_button.config(bg=CARD)
+    )
 
     # AI PROVIDER FRAME
     provider_frame = tk.Frame(

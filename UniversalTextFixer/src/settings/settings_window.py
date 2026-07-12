@@ -61,7 +61,7 @@ def create_section_title(parent, text, bg, fg):
         text=text,
         bg=bg,
         fg=fg,
-        font=("Segoe UI", 13, "bold")
+        font=("Segoe UI", 16, "bold")
     )
     label.pack(
         anchor="w",
@@ -149,7 +149,7 @@ def open_settings(parent_popup=None):
         text="⚙ Snape Settings",
         bg=BG,
         fg=TEXT,
-        font=("Segoe UI", 20, "bold")
+        font=("Segoe UI", 24, "bold")
     )
     title.pack(
         pady=(20, 25)
@@ -166,7 +166,7 @@ def open_settings(parent_popup=None):
         text="AI Provider",
         bg=BG,
         fg=TEXT,
-        font=("Segoe UI", 12, "bold")
+        font=("Segoe UI", 15, "bold")
     )
     provider_label.pack(
         anchor="w",
@@ -187,7 +187,7 @@ def open_settings(parent_popup=None):
         selectcolor=BG,
         activebackground=BG,
         activeforeground=TEXT,
-        font=("Segoe UI", 11)
+        font=("Segoe UI", 14)
     )
     gemini_radio.pack(
         anchor="w"
@@ -204,7 +204,7 @@ def open_settings(parent_popup=None):
         selectcolor=BG,
         activebackground=BG,
         activeforeground=TEXT,
-        font=("Segoe UI", 11)
+        font=("Segoe UI", 14)
     )
 
     ollama_radio.pack(
@@ -228,7 +228,8 @@ def open_settings(parent_popup=None):
         textvariable=mode_var,
         values=MODES,
         state="readonly",
-        width=25
+        width=25,
+        font=("Segoe UI", 14)
     )
     mode_box.pack(
         padx=30,
@@ -256,7 +257,7 @@ def open_settings(parent_popup=None):
         selectcolor=BG,
         activebackground=BG,
         activeforeground=TEXT,
-        font=("Segoe UI", 11)
+        font=("Segoe UI", 14)
     )
     dark_radio.pack(
         anchor="w",
@@ -272,7 +273,7 @@ def open_settings(parent_popup=None):
         selectcolor=BG,
         activebackground=BG,
         activeforeground=TEXT,
-        font=("Segoe UI", 11)
+        font=("Segoe UI", 14)
     )
     light_radio.pack(
         anchor="w",
@@ -294,7 +295,7 @@ def open_settings(parent_popup=None):
         selectcolor=BG,
         activebackground=BG,
         activeforeground=TEXT,
-        font=("Segoe UI", 11)
+        font=("Segoe UI", 14)
     )
     startup_checkbox.pack(
         anchor="w",
@@ -328,7 +329,7 @@ def open_settings(parent_popup=None):
         justify="left",
         bg=BG,
         fg=TEXT,
-        font=("Segoe UI", 10)
+        font=("Segoe UI", 13)
     )
     about.pack(
         anchor="w",
@@ -341,7 +342,7 @@ def open_settings(parent_popup=None):
         text="Save",
         bg=ACCENT,
         fg=TEXT,
-        font=("Segoe UI", 11, "bold"),
+        font=("Segoe UI", 14, "bold"),
         relief="flat",
         padx=25,
         pady=8,
