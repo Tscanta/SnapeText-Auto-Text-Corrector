@@ -318,7 +318,10 @@ def show_popup(mouse_x,  mouse_y):
         pady=12,
         font=("Segoe UI", 11),
         cursor="hand2",
-        command=lambda: open_history(window)
+        command=lambda: (
+            close_popup(window),
+            open_history()
+        )
     )
     history_button.pack(
         fill="x",
@@ -350,7 +353,10 @@ def show_popup(mouse_x,  mouse_y):
         pady=12,
         font=("Segoe UI", 11),
         cursor="hand2",
-        command=lambda: open_settings(window)
+        command=lambda: (
+            close_popup(window),
+            open_settings()
+        )
     )
     settings_button.pack(
         fill="x",
