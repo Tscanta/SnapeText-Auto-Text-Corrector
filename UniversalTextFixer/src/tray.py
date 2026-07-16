@@ -2,6 +2,9 @@
 #  on_open_settings(),
 #  run_tray()
 
+import os 
+import sys
+import subprocess
 from PIL import Image
 import pystray
 
@@ -13,6 +16,17 @@ from src.shutdown import shutdown
 def on_open_settings(icon, item):
     open_settings()
 
+# Restarts SnapeText
+def on_restart(icon, item):
+    print("Restarting SnapeText...")
+
+    icon.stop()
+
+    subprocess.Popen(
+        [sys.executable, "-m", "src.main"]
+    )
+
+    os._exit(0)
 
 # CREATING THE SYSTEM TRAY APPLICATION
 def run_tray():
@@ -33,6 +47,12 @@ def run_tray():
         pystray.MenuItem(
             "Settings",
             on_open_settings
+        ),
+
+        # Restart SnapeText
+        pystray.MenuItem(
+            "Restart SnapeText",
+            on_restart
         ),
 
         pystray.Menu.SEPARATOR,
